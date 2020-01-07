@@ -1,10 +1,10 @@
 import Enrollments from './components/Enrollments';
-import Courses from './components/Courses';
+import Classes from './components/Classes';
 import Login from './components/Login';
 
 const routes = [
   { path: '/enrollments', component: Enrollments },
-  { path: '/courses', component: Courses },
+  { path: '/courses', component: Classes },
   { path: '/login', component: Login }
 ];
 
