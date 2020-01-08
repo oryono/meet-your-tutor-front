@@ -13,7 +13,7 @@ const actions = {
   async getAllClasses({ commit }) {
     try {
       const { data } = await classesService.getAll();
-      commit('setCourses', data.data);
+      commit('setClasses', data.data);
     } catch (error) {
       // eslint-disable-next-line no-console
       console.log(error);
@@ -23,8 +23,8 @@ const actions = {
 
 // mutations
 const mutations = {
-  setCourses(state, products) {
-    state.all = products;
+  setClasses(state, classes) {
+    state.all = classes;
   }
 };
 

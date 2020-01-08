@@ -4,7 +4,8 @@ import Login from './components/Login';
 
 const routes = [
   { path: '/enrollments', component: Enrollments },
-  { path: '/courses', component: Classes },
+  { path: '/classes', component: Classes },
+  { path: '/my-classes', component: Classes },
   { path: '/login', component: Login }
 ];
 
