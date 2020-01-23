@@ -1,10 +1,9 @@
 <template>
     <div>
-
-        <h1>Enrollments go here</h1>
-        <ul v-if="enrollments">
+        <h4>All Enrollments</h4>
+        <ul v-if="enrollments.length > 0">
             <li v-for="enrollment in enrollments" :key="enrollment.id">
-                {{ enrollment }}
+                {{ enrollment.class.name }}
             </li>
         </ul>
         <div v-else>Nothing here</div>
@@ -21,11 +20,11 @@
         },
 
         computed: {
-            ...mapState ({
+            ...mapState({
                 enrollments: state => state.enrollments.all
             }),
 
-            ...mapActions ({
+            ...mapActions({
                 getEnrollments: 'enrollments/getEnrollments'
             })
         },

@@ -9,9 +9,12 @@
                 <b-collapse id="nav-collapse" is-nav>
                     <b-navbar-nav>
                         <router-link to="/my-classes" class="nav-link">My Classes</router-link>
-                        <router-link to="/classes" class="nav-link">Classes</router-link>
+                        <router-link to="/all-classes" class="nav-link">All Classes</router-link>
                         <router-link to="/enrollments" class="nav-link"
-                        >Enrollments
+                        >My Bookings
+                        </router-link>
+                        <router-link to="/instructors" class="nav-link"
+                        >Instructors
                         </router-link
                         >
                     </b-navbar-nav>
@@ -27,7 +30,7 @@
                                 <em>{{user.name}}</em>
                             </template>
                             <b-dropdown-item href="#">Profile</b-dropdown-item>
-                            <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+                            <b-dropdown-item href="#" @click="handleLogout">Sign Out</b-dropdown-item>
                         </b-nav-item-dropdown>
                     </b-navbar-nav>
                 </b-collapse>
@@ -47,11 +50,17 @@
             }),
 
             ...mapActions({
-                getCurrentUser: 'auth/getCurrentUser'
+                getCurrentUser: 'auth/getCurrentUser',
             })
         },
         created() {
-            this.getCurrentUser
+            this.getCurrentUser.catch(() => this.$router.push('/login'))
+        },
+
+        methods: {
+            handleLogout() {
+                this.$store.dispatch("auth/logOutUser").then(() => this.$router.push('/login'))
+            }
         }
     }
 </script>

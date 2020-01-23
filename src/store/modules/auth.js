@@ -1,9 +1,11 @@
 import {login} from "../../services/AuthenticationService";
 import {getCurrentUser} from "../../services/AuthenticationService"
+import client from "../../services/Client"
+
 // initial state
 const state = {
-    authenticated: false,
-    user: null
+    user: null,
+    authenticated: false
 };
 
 // getters
@@ -11,10 +13,12 @@ const getters = {};
 
 // actions
 const actions = {
-    async login({ commit }, credentials) {
+    async login({commit}, credentials) {
         try {
-            const { data } = await login(credentials);
+            const {data} = await login(credentials);
             commit('setAuth', data.user);
+            localStorage.setItem('token', data.token);
+            client.defaults.headers.common['Authorization'] = `Bearer ${data.token}`
         } catch (error) {
             // eslint-disable-next-line no-console
             console.log(error);
@@ -24,13 +28,19 @@ const actions = {
     async getCurrentUser({commit}) {
         try {
             const {data} = await getCurrentUser();
-            // eslint-disable-next-line no-console
-            console.log(data);
             commit('setAuth', data)
-        }catch (e) {
+        } catch (e) {
             // eslint-disable-next-line no-console
             console.log(e)
         }
+    },
+
+    // eslint-disable-next-line no-unused-vars
+    logOutUser({commit}) {
+        localStorage.removeItem('token');
+        localStorage.removeItem('vuex');
+        delete client.defaults.headers.common['Authorization'];
+        commit('unsetAuth')
     }
 };
 
@@ -39,6 +49,12 @@ const mutations = {
     setAuth(state, user) {
         state.user = user;
         state.authenticated = true
+    },
+
+    // eslint-disable-next-line no-unused-vars
+    unsetAuth(state) {
+        state.user = null;
+        state.authenticated = false;
     }
 
 };

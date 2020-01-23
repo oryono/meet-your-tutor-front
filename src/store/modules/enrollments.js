@@ -18,6 +18,18 @@ const actions = {
             // eslint-disable-next-line no-console
             console.log(error);
         }
+    },
+
+    async enroll({commit}, classId) {
+        try {
+            const { data } = await EnrollmentsService.enroll(classId);
+            commit('setEnrollments', data.data);
+        } catch (error) {
+            // eslint-disable-next-line no-console
+            console.log("error", error);
+            await Promise.reject(error);
+
+        }
     }
 };
 

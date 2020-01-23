@@ -3,6 +3,8 @@ import Vuex from 'vuex';
 import enrollments from './modules/enrollments';
 import classes from './modules/classes';
 import auth from "./modules/auth";
+import instructors from './modules/instructors'
+import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
@@ -12,7 +14,9 @@ export default new Vuex.Store({
   modules: {
     auth,
     classes,
-    enrollments
+    enrollments,
+    instructors
   },
   strict: debug,
+  plugins: [createPersistedState()]
 });
