@@ -2,6 +2,7 @@ import classesService from '../../services/classesService';
 
 // initial state
 const state = {
+    loading: false,
     all: [],
     userClasses: []
 };
@@ -11,9 +12,14 @@ const getters = {};
 
 // actions
 const actions = {
+    init({commit}) {
+        commit('setLoading', true)
+    },
+
     async getAllClasses({commit}) {
         try {
             const {data} = await classesService.getAll();
+            commit('setLoading', false)
             commit('setClasses', data.data);
         } catch (error) {
             // eslint-disable-next-line no-console
@@ -24,7 +30,8 @@ const actions = {
     async getUserClasses({commit}, userId) {
         try {
             const {data} = await classesService.getUserClasses(userId);
-            commit('setUserClasses', data.data)
+            commit('setLoading', false);
+            commit('setUserClasses', data.data);
         } catch (e) {
             // eslint-disable-next-line no-console
             console.log(e)
@@ -40,6 +47,10 @@ const mutations = {
 
     setUserClasses(state, classes) {
         state.userClasses = classes
+    },
+
+    setLoading(state, status) {
+        state.loading = status
     }
 };
 

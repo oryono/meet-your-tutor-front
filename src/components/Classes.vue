@@ -1,21 +1,29 @@
 <template>
     <div>
         <h4>All Classes</h4>
-        <li v-for="_class in classes" :key="_class.id">
-            {{ _class.name }} <span><b-button size="sm" @click="enroll(_class.id)">Enroll</b-button></span>
-            <br/>
-        </li>
+        <loading :active.sync="loading"
+                 :can-cancel="true"
+                 :is-full-page="true"></loading>
+        <div v-if="!loading">
+            <li v-for="_class in classes" :key="_class.id">
+                {{ _class.name }} <span><b-button size="sm" @click="enroll(_class.id)">Enroll</b-button></span>
+                <br/>
+            </li>
+        </div>
+
     </div>
 </template>
 
 <script>
     import {mapState, mapActions} from 'vuex';
-
+    // Import component
+    import Loading from 'vue-loading-overlay';
     export default {
         computed: {
             ...mapState({
                 classes: state => state.classes.all,
-                enrollments: state => state.enrollments.all
+                enrollments: state => state.enrollments.all,
+                loading: state => state.classes.loading
             }),
 
             ...mapActions({
@@ -36,6 +44,7 @@
         },
 
         created() {
+            this.$store.dispatch('classes/init');
             this.getAllClasses;
         },
 
@@ -49,6 +58,10 @@
                         this.$vToastify.error(error.response.data.errors.email_class_constraint[0])
                     })
             }
+        },
+
+        components: {
+            Loading
         }
     };
 </script>
