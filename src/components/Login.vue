@@ -51,8 +51,7 @@
 
         methods: {
             handleLogin() {
-                this.$store.dispatch('auth/login', this.credentials);
-                this.$router.push('/courses');
+                this.$store.dispatch('auth/login', this.credentials).then(() => this.$router.push('/my-classes'))
             }
         },
 

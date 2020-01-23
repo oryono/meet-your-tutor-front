@@ -1,12 +1,34 @@
 import Enrollments from './components/Enrollments';
 import Classes from './components/Classes';
+import MyClasses from './components/MyClasses'
+import Instructors from './components/Instructors'
 import Login from './components/Login';
+import VueRouter from "vue-router";
+import store from './store'
 
 const routes = [
-  { path: '/enrollments', component: Enrollments },
-  { path: '/classes', component: Classes },
-  { path: '/my-classes', component: Classes },
-  { path: '/login', component: Login }
+    {path: '/enrollments', component: Enrollments, meta: {requiresAuth: true}},
+    {path: '/all-classes', component: Classes, meta: {requiresAuth: true}},
+    {path: '/my-classes', component: MyClasses, meta: {requiresAuth: true}},
+    {path: '/instructors', component: Instructors, meta: {requiresAuth: true}},
+    {path: '/login', component: Login},
 ];
 
-export default routes;
+const router = new VueRouter({
+    routes,
+    mode: 'history',
+});
+//
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!store.state.auth.authenticated) {
+            next('/login')
+        } else {
+            next()
+        }
+    } else {
+        next() // make sure to always call next()!
+    }
+});
+
+export default router;
