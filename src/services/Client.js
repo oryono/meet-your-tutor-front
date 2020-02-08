@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const client = axios.create({
-    baseURL: 'https://meetyourtutor.online/api/'
+    baseURL: 'https://api.meetyourtutor.online/api/'
 });
 
 client.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem('token')}` || '';
