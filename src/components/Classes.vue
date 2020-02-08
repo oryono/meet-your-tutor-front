@@ -1,14 +1,21 @@
 <template>
     <div>
-        <h4>All Classes</h4>
         <loading :active.sync="loading"
                  :can-cancel="true"
                  :is-full-page="true"></loading>
         <div v-if="!loading">
-            <li v-for="_class in classes" :key="_class.id">
-                {{ _class.name }} <span><b-button size="sm" @click="enroll(_class.id)">Enroll</b-button></span>
-                <br/>
-            </li>
+            <div v-if="classes.length > 0">
+                <h4>All Classes</h4>
+                <li v-for="_class in classes" :key="_class.id">
+                    {{ _class.name }} <span><b-button size="sm" @click="enroll(_class.id)">Enroll</b-button></span>
+                    <br/>
+                </li>
+            </div>
+
+            <div v-else>
+                Nothing here
+            </div>
+
         </div>
 
     </div>

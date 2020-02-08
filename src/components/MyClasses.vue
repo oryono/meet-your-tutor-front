@@ -1,10 +1,18 @@
 <template>
     <div>
-        <h4>My Classes</h4>
-        <li v-for="_class in userClasses" :key="_class.id">
-            {{ _class.name }}
-            <br/>
-        </li>
+        <div v-if="userClasses.length > 0">
+            <h4>My Classes</h4>
+            <li v-for="_class in userClasses" :key="_class.id">
+                {{ _class.name }}
+                <br/>
+            </li>
+        </div>
+
+        <div v-else>
+            <p>Nothing here</p>
+            <router-link to="/classes/create" class="nav-link">Create a class</router-link>
+        </div>
+
     </div>
 
 </template>
