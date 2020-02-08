@@ -52,3 +52,7 @@ services:
 volumes:
   db-data:
   traefik-certificates:
+
+networks:
+  traefik-public:
+    external: true
