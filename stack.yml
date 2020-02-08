@@ -49,3 +49,7 @@ services:
         - "traefik.enable=true"
         - "traefik.http.routers.traefik.rule=Host(`monitor.patrickoryono.site`)"
         - "traefik.http.routers.traefik.service=api@internal"
+
+volumes:
+  db-data:
+  traefik-certificates:
