@@ -5,13 +5,11 @@ services:
     image: "$CI_REGISTRY/$CI_DEPLOY_USER/$CI_PROJECT_NAME:$CI_COMMIT_SHA"
     volumes:
       - '/app/node_modules'
-    ports:
-      - '8081:8080'
     deploy:
       labels:
         - "traefik.enable=true"
         - "traefik.http.routers.app.rule=Host(`meetyourtutor.online`)"
-        - "traefik.http.services.app.loadbalancer.server.port=8080"
+        - "traefik.http.services.app.loadbalancer.server.port=9000"
         - "traefik.http.routers.app.entrypoints=websecure"
         - "traefik.http.routers.app.tls.certresolver=letsencryptresolver"
         - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
