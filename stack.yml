@@ -2,7 +2,6 @@ version: '3.7'
 
 services:
   app:
-    container_name: app
     image: "$CI_REGISTRY/$CI_DEPLOY_USER/$CI_PROJECT_NAME:$CI_COMMIT_SHA"
     volumes:
       - '/app/node_modules'
