@@ -1,9 +1,14 @@
 <template>
     <div>
-        <h4>Instructors will go here</h4>
-        <li v-for="instructor in instructors" :key="instructor.id">
-            {{ instructor.name}}
-        </li>
+        <div v-if="instructors.length > 0">
+            <h4>All Instructors</h4>
+            <li v-for="instructor in instructors" :key="instructor.id">
+                {{ instructor.name}}
+            </li>
+        </div>
+
+        <div v-else>Nothing here. <span></span></div>
+
     </div>
 </template>
 

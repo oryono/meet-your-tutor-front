@@ -5,12 +5,14 @@ import Instructors from './components/Instructors'
 import Login from './components/Login';
 import VueRouter from "vue-router";
 import store from './store'
+import NewClass from "./components/NewClass";
 
 const routes = [
     {path: '/enrollments', component: Enrollments, meta: {requiresAuth: true}},
     {path: '/all-classes', component: Classes, meta: {requiresAuth: true}},
     {path: '/my-classes', component: MyClasses, meta: {requiresAuth: true}},
     {path: '/instructors', component: Instructors, meta: {requiresAuth: true}},
+    {path: '/classes/create', component: NewClass, meta: {requiresAuth: true}},
     {path: '/login', component: Login},
 ];
 

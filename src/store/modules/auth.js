@@ -38,7 +38,6 @@ const actions = {
     // eslint-disable-next-line no-unused-vars
     logOutUser({commit}) {
         localStorage.removeItem('token');
-        localStorage.removeItem('vuex');
         delete client.defaults.headers.common['Authorization'];
         commit('unsetAuth')
     }

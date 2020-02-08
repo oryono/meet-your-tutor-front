@@ -14,7 +14,7 @@
                         >My Bookings
                         </router-link>
                         <router-link to="/instructors" class="nav-link"
-                        >Instructors
+                        >Instructor
                         </router-link
                         >
                     </b-navbar-nav>

@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h4>All Enrollments</h4>
         <ul v-if="enrollments.length > 0">
+            <h4>All Enrollments</h4>
             <li v-for="enrollment in enrollments" :key="enrollment.id">
                 {{ enrollment.class.name }}
             </li>
