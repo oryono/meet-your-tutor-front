@@ -18,4 +18,6 @@ COPY . .
 # build app for production with minification
 RUN npm run build
 
+EXPOSE 7000
+
 CMD [ "http-server", "dist", "--port", "7000" ]
