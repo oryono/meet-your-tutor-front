@@ -13,15 +13,10 @@ services:
         - "traefik.http.routers.app.rule=Host(`meetyourtutor.online`)"
         - "traefik.http.services.app.loadbalancer.server.port=6000"
         - "traefik.http.routers.app.entrypoints=websecure"
-        - "traefik.http.routers.app.tls.certresolver=letsencryptresolver"
-        - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
-        - "traefik.http.routers.redirect.rule=Host(`meetyourtutor.online`)"
-        - "traefik.http.routers.redirect.entrypoints=web"
-        - "traefik.http.routers.redirect.middlewares=redirect-to-https"
+        - "traefik.http.routers.app.tls.certresolver=leresolver"
 
 volumes:
   db-data:
-  traefik-certificates:
 
 networks:
   traefik-public:
